@@ -2,8 +2,12 @@ import React from "react";
 
 class ChatWindow extends React.Component {
   chatBottom = React.createRef();
+  notificationAudio = React.createRef();
   scrollToBottom = () => {
     this.chatBottom.current.scrollIntoView({ behavior: "smooth" });
+    const audio = this.notificationAudio.current;
+    audio.currentTime = 0;
+    audio.play();
   };
   componentDidMount() {
     this.scrollToBottom();
@@ -74,6 +78,7 @@ class ChatWindow extends React.Component {
           {this.typingIndicator()}
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>
+        <audio ref={this.notificationAudio} src="../sound/notification.wav"></audio>
       </>
     );
   }
