@@ -5,16 +5,25 @@ class ChatWindow extends React.Component {
   notificationAudio = React.createRef();
   scrollToBottom = () => {
     this.chatBottom.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  playNotification= () => {
+    // To Prevent Playing the notification when the component updates due to
+    // change of  typing status state
+    if(this.props.typingStatus.length !== 0){
+      return;
+    }
     const audio = this.notificationAudio.current;
     audio.currentTime = 0;
     audio.play();
-  };
+  }
   componentDidMount() {
     this.scrollToBottom();
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
+    this.playNotification();
   }
 
   typingIndicator = () => {
@@ -78,7 +87,7 @@ class ChatWindow extends React.Component {
           {this.typingIndicator()}
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>
-        <audio ref={this.notificationAudio} src="../sound/notification.wav"></audio>
+        <audio ref={this.notificationAudio} src={window.location.origin + "/sound/notification.mp3"}></audio>
       </>
     );
   }
