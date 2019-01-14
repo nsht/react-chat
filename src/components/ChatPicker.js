@@ -6,7 +6,6 @@ class ChatPicker extends React.Component {
 
   goToChat = event => {
     event.preventDefault();
-    console.log(this.myInput.current.value);
     // const cname = this.myInput
     const chatName = this.myInput.current.value;
     this.props.history.push({

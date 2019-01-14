@@ -48,7 +48,6 @@ class App extends React.Component {
 
   render() {
     let username = "Anon";
-    console.log(this.props.location);
     if (typeof this.props.location.state !== "undefined") {
       username = this.props.location.state.username;
     }
